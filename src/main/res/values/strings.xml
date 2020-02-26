@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Unit Converter Calculator</string>
+    <string name="title_activity_selection_activity">Unit Selection</string>
+    <string-array name="length_units">
+        <item>Yards</item>
+        <item>Meters</item>
+        <item>Miles</item>
+    </string-array>
+    <string-array name="volume_units">
+        <item>Liters</item>
+        <item>Quarts</item>
+        <item>Gallons</item>
+    </string-array>
 </resources>

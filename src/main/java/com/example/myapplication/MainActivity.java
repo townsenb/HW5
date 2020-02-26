@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.TextView;
 
 /*
     Ben Townsend
@@ -14,6 +16,9 @@ import android.widget.EditText;
     HW5
 */
 public class MainActivity extends AppCompatActivity{
+
+
+    public static final int UNIT_SELECTION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity{
         Button calculate = findViewById(R.id.calculateButton);
         Button clear = findViewById(R.id.clearButton);
         Button mode = findViewById(R.id.modeButton);
+        Button settings = findViewById(R.id.settingsButton);
 
 
         double yards_to_meters = 0.9144;
@@ -52,5 +58,23 @@ public class MainActivity extends AppCompatActivity{
 
         });
 
+
+        settings.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, selection_activity.class);
+            startActivityForResult(intent, UNIT_SELECTION);
+        });
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == UNIT_SELECTION){
+            TextView fromLabel = findViewById(R.id.from_label);
+            TextView toLabel = findViewById(R.id.to_label);
+
+            fromLabel.setText(data.getStringExtra("from_unit"));
+            toLabel.setText(data.getStringExtra("to_unit"));
+        }
+    }
+
 }
