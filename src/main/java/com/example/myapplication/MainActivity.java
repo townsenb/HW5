@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity{
         EditText from = findViewById(R.id.from_EditText);
         EditText to = findViewById(R.id.to_EditText);
 
+        TextView fromLabel = findViewById(R.id.from_label);
+        TextView toLabel = findViewById(R.id.to_label);
+
         Button calculate = findViewById(R.id.calculateButton);
         Button clear = findViewById(R.id.clearButton);
         Button mode = findViewById(R.id.modeButton);
@@ -42,10 +45,12 @@ public class MainActivity extends AppCompatActivity{
         calculate.setOnClickListener(v -> {
             if(from.length() == 0 && to.length() != 0){
                 int i = Integer.parseInt(to.getText().toString());
-                from.setText("" + (i / yards_to_meters));
+                double conv = getConversion(toLabel.getText().toString(),fromLabel.getText().toString());
+                from.setText("" + (i * conv));
             }else if(to.length() == 0 && from.length() != 0){
                 int i = Integer.parseInt(from.getText().toString());
-                to.setText("" + (i * yards_to_meters));
+                double conv = getConversion(fromLabel.getText().toString(),toLabel.getText().toString());
+                to.setText("" + (i * conv));
             }else{
                 to.setText("");
                 from.setText("");
@@ -96,6 +101,18 @@ public class MainActivity extends AppCompatActivity{
 
         fromLabel.setText(defaultFromUnit);
         toLabel.setText(defaultToUnit);
-
     }
+
+    private double getConversion(String from, String to){
+        if(isVolume){
+            UnitsConverter.VolumeUnits fromEnum = UnitsConverter.VolumeUnits.valueOf(from);
+            UnitsConverter.VolumeUnits toEnum = UnitsConverter.VolumeUnits.valueOf(to);
+            return UnitsConverter.convert(1.0,fromEnum,toEnum);
+        }else{
+            UnitsConverter.LengthUnits fromEnum = UnitsConverter.LengthUnits.valueOf(from);
+            UnitsConverter.LengthUnits toEnum = UnitsConverter.LengthUnits.valueOf(to);
+            return UnitsConverter.convert(1.0,fromEnum,toEnum);
+        }
+    }
+
 }
