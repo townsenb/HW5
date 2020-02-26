@@ -17,8 +17,8 @@ import android.widget.TextView;
 */
 public class MainActivity extends AppCompatActivity{
 
-
     public static final int UNIT_SELECTION = 1;
+    public static boolean isVolume = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,11 @@ public class MainActivity extends AppCompatActivity{
         Button mode = findViewById(R.id.modeButton);
         Button settings = findViewById(R.id.settingsButton);
 
-
+        boolean isVolume = false;
         double yards_to_meters = 0.9144;
+
+        String unit = (isVolume)? "Volume" : "Length";
+        updateTitleLabel(unit);
 
         calculate.setOnClickListener(v -> {
             if(from.length() == 0 && to.length() != 0){
@@ -55,9 +58,15 @@ public class MainActivity extends AppCompatActivity{
         });
 
         mode.setOnClickListener(v -> {
+            toggleMode();
+            String defaultFromUnit = (isVolume)? "Liters" : "Meters";
+            String defaultToUnit = (isVolume)? "Gallons": "Yards";
+            TextView fromLabel = findViewById(R.id.from_label);
+            TextView toLabel = findViewById(R.id.to_label);
 
+            fromLabel.setText(defaultFromUnit);
+            toLabel.setText(defaultToUnit);
         });
-
 
         settings.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, selection_activity.class);
@@ -77,4 +86,15 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    private void updateTitleLabel(String type){
+        TextView title = findViewById(R.id.titleLabel);
+        title.setText(type + " Converter");
+    }
+
+    private void toggleMode(){
+        isVolume = !isVolume;
+        String type = (isVolume)? "Volume" : "Length";
+        updateTitleLabel(type);
+
+    }
 }

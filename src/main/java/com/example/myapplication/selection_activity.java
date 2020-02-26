@@ -50,7 +50,7 @@ public class selection_activity extends AppCompatActivity {
         ArrayAdapter<CharSequence> volume_adapter = ArrayAdapter.createFromResource(this,
                 R.array.volume_units,android.R.layout.simple_spinner_item);
 
-        ArrayAdapter<CharSequence> adapter = (mode == 1)? volume_adapter : length_adapter;
+        ArrayAdapter<CharSequence> adapter = (MainActivity.isVolume)? volume_adapter : length_adapter;
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fromSpinner.setAdapter(adapter);
