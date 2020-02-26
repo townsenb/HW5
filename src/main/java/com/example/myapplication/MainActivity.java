@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity{
 
         mode.setOnClickListener(v -> {
             toggleMode();
-            String defaultFromUnit = (isVolume)? "Liters" : "Meters";
-            String defaultToUnit = (isVolume)? "Gallons": "Yards";
-            TextView fromLabel = findViewById(R.id.from_label);
-            TextView toLabel = findViewById(R.id.to_label);
-
-            fromLabel.setText(defaultFromUnit);
-            toLabel.setText(defaultToUnit);
         });
 
         settings.setOnClickListener(v -> {
@@ -95,6 +88,14 @@ public class MainActivity extends AppCompatActivity{
         isVolume = !isVolume;
         String type = (isVolume)? "Volume" : "Length";
         updateTitleLabel(type);
+
+        String defaultFromUnit = (isVolume)? "Liters" : "Meters";
+        String defaultToUnit = (isVolume)? "Gallons": "Yards";
+        TextView fromLabel = findViewById(R.id.from_label);
+        TextView toLabel = findViewById(R.id.to_label);
+
+        fromLabel.setText(defaultFromUnit);
+        toLabel.setText(defaultToUnit);
 
     }
 }
