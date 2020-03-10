@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity{
         String type = (isVolume)? "Volume" : "Length";
         updateTitleLabel(type);
 
-        String defaultFromUnit = (isVolume)? "Liters" : "Meters";
-        String defaultToUnit = (isVolume)? "Gallons": "Yards";
+        String defaultFromUnit = (isVolume)? "Gallons" : "Yards";
+        String defaultToUnit = (isVolume)? "Liters": "Miles";
         TextView fromLabel = findViewById(R.id.from_label);
         TextView toLabel = findViewById(R.id.to_label);
 
